@@ -6,6 +6,23 @@
   height: 40vmin;
   pointer-events: none;
 }
+ul {
+  list-style-type: none;
+  font-size: 20px;
+}
+.size {
+  width: 30px;
+}
+.completed {
+  text-decoration: line-through;
+}
+.div-width {
+  width: 100%;
+  text-align: left;
+}
+.cursor {
+  cursor: pointer;
+}
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
