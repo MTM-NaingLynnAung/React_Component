@@ -1,35 +1,20 @@
-import React, { useContext } from 'react'
-import { TodosContext } from '../context/TodosContext'
+import { useSelector, useDispatch } from 'react-redux'
+import { checkAll, unCheckAll } from '../redux/action'
 
 function CheckUncheckAll() {
-  const { todos, setTodos } = useContext(TodosContext)
-  const remaining = todos.filter(todo => !todo.isCompleted).length
-
-  const checkAll = () => {
-    setTodos(
-      todos.map( todo => {
-        return { ...todo, isCompleted: true }
-       })
-    )
-  }
-
-  const unCheckAll = () => {
-    setTodos(
-      todos.map( todo => {
-        return { ...todo, isCompleted: false }
-       })
-    )
-  }
+  const state = useSelector(state => ({ ...state }))
+  let dispatch = useDispatch();
+  const remaining = state.todos.filter(todo => !todo.isCompleted).length
 
   return (
-   
+    state.todos.length ? (
       remaining === 0 ? (
-        <p style={{textAlign: 'right', float: 'right'}} className='cursor' onClick={() => unCheckAll()}>UnCheck All</p>
-        ) : (
-          <p style={{textAlign: 'right', float: 'right'}} className='cursor' onClick={() => checkAll()}>Check All</p>
-          
+        <p style={{ textAlign: 'right', float: 'right' }} className='cursor' onClick={() => dispatch(unCheckAll())}>UnCheck All</p>
+      ) : (
+        <p style={{ textAlign: 'right', float: 'right' }} className='cursor' onClick={() => dispatch(checkAll())}>Check All</p>
+
       )
-    
+    ) : ('')
   )
 }
 

@@ -1,28 +1,25 @@
-import React, { useContext } from 'react'
-import { TodosContext } from '../context/TodosContext'
+import { clearCompleted } from '../redux/action'
+import { useSelector, useDispatch } from 'react-redux'
 
 function Footer() {
 
-  const { todos, setTodos } = useContext(TodosContext)
+  const state = useSelector(state => ({ ...state }))
+  let dispatch = useDispatch()
 
-  const remaining = todos.filter(todo => !todo.isCompleted).length
+  const remaining = state.todos.filter(todo => !todo.isCompleted).length
 
-  const clearCompleted = () => {
-    setTodos([...todos].filter(todo => !todo.isCompleted))
-  }
-
-  const completed = todos.filter(todo => todo.isCompleted).length
+  const completed = state.todos.filter(todo => todo.isCompleted).length
 
   return (
     <div className='d-flex justify-content-between'>
-        <span>{remaining} items remaining</span>
-        {completed ? (
+      <span>{remaining} items remaining</span>
+      {completed ? (
 
-          <span className='cursor' onClick={ clearCompleted }>Clear Completed</span>
-        ) : (
-          <span></span>
-        )}
-      </div>
+        <span className='cursor' onClick={() => dispatch(clearCompleted())}>Clear Completed</span>
+      ) : (
+        <span></span>
+      )}
+    </div>
   )
 }
 

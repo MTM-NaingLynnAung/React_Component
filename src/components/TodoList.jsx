@@ -4,7 +4,6 @@ import TodoItem from './TodoItem'
 
 function TodoList() {
 
-
   return (
     <>
       <ul className='mt-2'>
